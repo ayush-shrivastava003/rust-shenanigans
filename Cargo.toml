@@ -1,0 +1,9 @@
+[package]
+
+name = "rust-shenanigans"
+version = "0.0.1"
+authors = [ "Ayush", "Tristan" ]
+
+[dependencies]
+
+rand = "0.3.0"

@@ -1,2 +1,2 @@
 language = "bash"
-run = "rustc main.rs && ./main"
+run = "cargo run"
