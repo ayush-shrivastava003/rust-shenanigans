@@ -11,7 +11,10 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 /*
-follow best practice of having all code below the the statements that import packages
+best practices:
+* have all code below package imports
+* don't use i64 unless necessary b/c any size integer can be converted to i64 but i64 cannot be converted to any other size integer
+
 handy notes:
 "::" is how you access a static method of a type, there is more to this that you should look in the documentation for
 "." is how you access instance methods
@@ -52,10 +55,23 @@ macro_rules! printv {
 	};
 }
 
-fn function(arg: i64) -> i64{
-	let mut g = arg*arg;
+fn pow(n: i32, power: i32) -> i32 {
+	let mut f = 1;
+	let mut c = 0;
+	loop {
+		if c >= power {
+			break;
+		}
+		f *= n;
+		c += 1;
+	}
+	return f;
+}
+
+fn function(arg: i32) -> i32{
+	let g = pow(arg, 2);
 	printv!(g);
-	g + 1
+	return (g + 1);
 }
 
 fn guess() {
