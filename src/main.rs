@@ -3,27 +3,41 @@
 //http://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/guessing-game.html
 // thats where the code/tutorial is
 
-//how do i use rustc with cargo packages
-// dont
-// just ctrl+enter to run, check .replit for exact bash
-
-//if you want to build without running, 'cargo build' will put the binary into target/debug/rust-shenanigans
-
-// can u invite Alfaheimr
-//ok
-//also you have access to push to githu
-// nice, check out what i've done
-
 extern crate rand;
 
 use std::io;
 use std::cmp::Ordering;
 use rand::Rng;
 
+// prob best practice
+//so is "::" just a way to signifiy a method or value of an object
+// like in python you could do Object.value or Object.method()
+//but in rust it would be Object::value or Object::method
+
+macro_rules! print {
+	( $( $x:expr ),* ) => {
+		{
+			$(
+				println!("{}", $x);
+			)*
+		}
+	};
+}
+
+fn function(arg: i64) -> i64{
+	let mut g = arg*arg;
+	print!(g);
+	// println!("{}", g);
+	g + 1
+}
+
 fn guess() {
 	println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    // let value = function(2);
+    println!("2^2 is {}", function(2));
 
     loop {
         println!("Please input your guess.");
@@ -51,24 +65,28 @@ fn guess() {
     }
 }
 
+
 fn main() {
-	// prints prompt
-    println!("enter program id:");
-	// initializes a variable
-	let mut id = String::new();
-	// gets input
-	io::stdin().read_line(&mut id).expect("Falied to read line");
 	// sets if the console should be cleared ()
 	let ndb : bool = true;
-	if !ndb {
-		// clears the console
-		println!("\x1bc");
-	}
-	// removes leading and trailing whitespaces
-	let id = id.trim();
-	// matches given id to processes
-	match id {
-		"0" => guess(),
-		_ => println!("unrecognized id"),
+	loop {
+		// prints prompt
+		println!("enter program id:");
+		// initializes a variable
+		let mut id = String::new();
+		// gets input
+		io::stdin().read_line(&mut id).expect("Falied to read line");
+		if !ndb {
+			// clears the console
+			println!("\x1bc");
+		}
+		// removes leading and trailing whitespaces
+		let id = id.trim();
+		// matches given id to processes
+		match id {
+			"-1" => {break},
+			"0" => guess(),
+			_ => println!("unrecognized id"),
+		}
 	}
 }
