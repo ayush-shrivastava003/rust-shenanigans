@@ -71,16 +71,13 @@ fn pow(n: i32, power: i32) -> i32 {
 fn function(arg: i32) -> i32{
 	let g = pow(arg, 2);
 	printv!(g);
-	return (g + 1);
+	return g + 1;
 }
 
 fn guess() {
 	println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
-
-    // let value = function(2);
-    println!("2^2 is {}", function(2));
 
     loop {
         println!("Please input your guess.");
