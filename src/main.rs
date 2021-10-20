@@ -3,23 +3,50 @@
 //http://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/guessing-game.html
 // thats where the code/tutorial is
 
+// imports packages
 extern crate rand;
 
 use std::io;
 use std::cmp::Ordering;
 use rand::Rng;
 
-// prob best practice
-//so is "::" just a way to signifiy a method or value of an object
-// like in python you could do Object.value or Object.method()
-//but in rust it would be Object::value or Object::method
+/*
+follow best practice of having all code below the the statements that import packages
+handy notes:
+"::" is how you access a static method of a type, there is more to this that you should look in the documentation for
+"." is how you access instance methods
+"let" is how you define a variable
+"let mut" is how you define a mutable variable
+"name [: type]" is how you optionally specify a type for the variable
+variables can be overwritten e.x. to change their type by re-defining them using another "let" keyword
+"loop" is the keyword for an infinite loop, you have to specify your own exit conditions using the "break" statement
+"continue" skips to the next iteration of the loop
+"while" and "for" loops do exist but it's unclear to me what their limitations are
+loops can have labels "'label' [loop syntax]" this allows continues in nested loops to apply to loops that the continue isn't in e.x.:
+'loop1' loop {
+	'loop2' loop {
+		if breakout2 {
+			break 'loop2'
+		}
+		if breakout1 {
+			break 'loop1'
+		}
+	}
+}
+*/
 
+// a print operation that can accept any number of arguments then prints them
 macro_rules! printv {
+	// vodoo
 	( $( $x:expr ),* ) => {
+		// more vodoo
 		{
+			// even more vodoo
 			$(
+				// prints the argument
 				print!("{} ", $x);
 			)*
+			// prints a newline
 			print!("\n");
 		}
 	};
@@ -27,8 +54,7 @@ macro_rules! printv {
 
 fn function(arg: i64) -> i64{
 	let mut g = arg*arg;
-	printv!(g, 1);
-	// println!("{}", g);
+	printv!(g);
 	g + 1
 }
 
@@ -66,15 +92,23 @@ fn guess() {
     }
 }
 
+// lists program ids
 fn listpids() {
+	// holds ids
 	let list = ["0: guessing game (rng)", "1: unused"];
+	// length of id list
 	let len = list.len();
+	// loop variable
 	let mut i = 0;
+	// loops
 	loop {
+		// checks that i is less than the length of the id list
 		if i >= len {
 			break;
 		}
+		// prints the ith item of the id list
 		printv!(list[i]);
+		// increments i
 		i += 1;
 	}
 }
