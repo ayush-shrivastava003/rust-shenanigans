@@ -14,19 +14,20 @@ use rand::Rng;
 // like in python you could do Object.value or Object.method()
 //but in rust it would be Object::value or Object::method
 
-macro_rules! print {
+macro_rules! printv {
 	( $( $x:expr ),* ) => {
 		{
 			$(
-				println!("{}", $x);
+				print!("{} ", $x);
 			)*
+			print!("\n");
 		}
 	};
 }
 
 fn function(arg: i64) -> i64{
 	let mut g = arg*arg;
-	print!(g);
+	printv!(g, 1);
 	// println!("{}", g);
 	g + 1
 }
@@ -65,13 +66,25 @@ fn guess() {
     }
 }
 
+fn listpids() {
+	let list = ["0: guessing game (rng)", "1: unused"];
+	let len = list.len();
+	let mut i = 0;
+	loop {
+		if i >= len {
+			break;
+		}
+		printv!(list[i]);
+		i += 1;
+	}
+}
 
 fn main() {
 	// sets if the console should be cleared ()
 	let ndb : bool = true;
 	loop {
 		// prints prompt
-		println!("enter program id:");
+		println!("enter program id (-1 to exit, -2 for id list):");
 		// initializes a variable
 		let mut id = String::new();
 		// gets input
@@ -84,6 +97,7 @@ fn main() {
 		let id = id.trim();
 		// matches given id to processes
 		match id {
+			"-2" => listpids(),
 			"-1" => {break},
 			"0" => guess(),
 			_ => println!("unrecognized id"),
