@@ -1,0 +1,15 @@
+word
+world
+hello
+amazing
+beautiful
+joust
+driving
+collections
+number
+letter
+symbol
+boolean
+whitespace
+chocolate
+cookies
