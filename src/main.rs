@@ -12,11 +12,13 @@ use std::cmp::Ordering;
 use rand::Rng;
 use std::convert::TryFrom;
 use mods::utility::*;
+use std::fs::File;
+use std::io::Read;
 
 /*
 best practices:
 * have all code below package imports
-* don't use i64 unless necessary b/c any size integer can be converted to i64 but i64 cannot be converted to any other size integer
+* don't use i64 unless necessary b/c any size integer can be converted to i64 but i64 cannot be converted to any other size integer (without being annoying)
 
 handy notes:
 "::" is how you access a static method of a type, there is more to this that you should look in the documentation for
@@ -41,12 +43,6 @@ loops can have labels "'label' [loop syntax]" this allows continues in nested lo
 }
 */
 
-/* 
-TRISTAN STOP BEING SO GOOD
-seriously though how quickly are you reading and understanding the documentation
-cause it takes me forever to understand one tiny component
-*/
-
 // a print operation that can accept any number of arguments then prints them
 macro_rules! printv {
 	// vodoo
@@ -66,12 +62,6 @@ macro_rules! printv {
 
 fn randrange(n1: i32, n2: i32) -> i32 {
 	return rand::thread_rng().gen_range(n1, n2);
-}
-
-fn function(arg: i32) -> i32{
-	let g = pow(arg, 2);
-	printv!(g);
-	return g + 1;
 }
 
 fn guess_num() {
@@ -104,9 +94,6 @@ fn guess_num() {
         }
     }
 }
-
-use std::fs::File;
-use std::io::Read;
 
 // runs a guessing game where the player tries to guess a word
 fn guess_word() {
