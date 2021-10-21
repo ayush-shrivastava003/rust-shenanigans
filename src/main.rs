@@ -200,11 +200,53 @@ fn guess_word() {
 	println!("your score is: {}", pscore);
 }
 
+// generates random numbers
+fn num_gen() {
+	// gets lower and upper bounds, as well as the number of times to generate
+	println!("enter lower bound (inclusive):");
+	let mut lb = String::new();
+	io::stdin().read_line(&mut lb).expect("FAILURE");
+	println!("enter upper bound (exclusive):");
+	let mut ub = String::new();
+	io::stdin().read_line(&mut ub).expect("FAILURE");
+	println!("enter number of numbers to generate:");
+	let mut nc = String::new();
+	io::stdin().read_line(&mut nc).expect("FAILURE");
+	// converts strings to i32s
+	let lb: i32 = match lb.trim().parse() {
+		Ok(num) => num,
+		Err(_) => {return},
+	};
+	let ub: i32 = match ub.trim().parse() {
+		Ok(num) => num,
+		Err(_) => {return},
+	};
+	let nc: i32 = match nc.trim().parse() {
+		Ok(num) => num,
+		Err(_) => {return},
+	};
+	// does readback of info
+	println!("printing {} number(s) between {} and {}", nc, lb, ub);
+	// generates numbers
+	let mut i = 0;
+	loop {
+		if i >= nc {
+			print!("\n");
+			break;
+		}
+		print!("{}", randrange(lb, ub));
+		i += 1;
+		if i < nc {
+			print!(", ");
+		}
+	}
+}
+
 // lists program ids
 fn listpids() {
 	println!("\x1b[38;2;0;255;0mlisting program ids\x1b[39m");
 	// holds ids
-	let list = ["0: guessing game (rng)", "1: guessing game (word)"];
+	let list = ["0: guessing game (rng)", "1: guessing game (word)", "2: random number generator"];
 	// length of id list
 	let len = list.len();
 	// loop variable
@@ -244,6 +286,7 @@ fn main() {
 			"-1" => {break},
 			"0" => guess_num(),
 			"1" => guess_word(),
+			"2" => num_gen(),
 			_ => println!("unrecognized id"),
 		}
 	}
