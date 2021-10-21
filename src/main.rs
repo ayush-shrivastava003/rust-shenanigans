@@ -106,18 +106,14 @@ fn guess_num() {
 }
 
 use std::fs::File;
-use std::io::BufReader;
-use std::io::prelude::*;
+use std::io::Read;
 
 // runs a guessing game where the player tries to guess a word
 fn guess_word() {
 	let mut file = File::open("src/wordguesswords.txt").expect("FAILURE");
-	// let mut buf_reader = BufReader::new(file);
 	let mut contents = String::new();
 	file.read_to_string(&mut contents).expect("FAILURE");
 	let contents: Vec<_> = contents.split("\n").collect();
-	// buf_reader.read_to_string(&mut contents);
-	println!("{:?}", contents);
 	// tells the player about the game
 	println!("guess the word in as few guesses as possible. each incorrect guess reveals a random letter, but also decreases your score");
 	// list of words
@@ -136,6 +132,7 @@ fn guess_word() {
 			None => {break},
 		}
 	}
+	// creates a vector that holds all unrevealed positions
 	let mut cl = Vec::new();
 	let mut i = 1;
 	loop {
@@ -168,10 +165,13 @@ fn guess_word() {
 		if g == word {
 			break;
 		} else {
+			// reveals a random letter
 			if score > 5 {
-				let mut pos = 1;
+				// gets the random index
 				let e = randrange(0, i32::try_from(cl.len()).unwrap());
+				// gets the position to be revealed
 				let pos = cl[e as usize];
+				// format stuff
 				let mut p = "th";
 				if pos < 4 {
 					p = "rd";
@@ -182,8 +182,10 @@ fn guess_word() {
 				if pos < 2 {
 					p = "st";
 				}
+				// gets the letter
 				let l = v[pos];
 				println!("the {}{} letter is: {}", pos, p, l);
+				// discards the position that was revealed
 				let mut nv = Vec::new();
 				let mut lv = 0;
 				loop {
