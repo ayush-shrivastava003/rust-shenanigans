@@ -12,6 +12,7 @@ use std::cmp::Ordering;
 use rand::Rng;
 use std::convert::TryFrom;
 use mods::utility::*;
+use mods::nurnet::*;
 use std::fs::File;
 use std::io::Read;
 
@@ -19,28 +20,6 @@ use std::io::Read;
 best practices:
 * have all code below package imports
 * don't use i64 unless necessary b/c any size integer can be converted to i64 but i64 cannot be converted to any other size integer (without being annoying)
-
-handy notes:
-"::" is how you access a static method of a type, there is more to this that you should look in the documentation for
-"." is how you access instance methods
-"let" is how you define a variable
-"let mut" is how you define a mutable variable
-"name [: type]" is how you optionally specify a type for the variable
-variables can be overwritten e.x. to change their type by re-defining them using another "let" keyword
-"loop" is the keyword for an infinite loop, you have to specify your own exit conditions using the "break" statement
-"continue" skips to the next iteration of the loop
-"while" and "for" loops do exist but it's unclear to me what their limitations are
-loops can have labels "'label' [loop syntax]" this allows continues in nested loops to apply to loops that the continue isn't in e.x.:
-'loop1' loop {
-	'loop2' loop {
-		if breakout2 {
-			break 'loop2'
-		}
-		if breakout1 {
-			break 'loop1'
-		}
-	}
-}
 */
 
 // a print operation that can accept any number of arguments then prints them
@@ -242,6 +221,11 @@ fn num_gen() {
 	}
 }
 
+// neural network interface
+fn neural_net() {
+	println!("\x1b[38;2;0;255;0mneural network interface\x1b[39m");
+}
+
 // lists program ids
 fn listpids() {
 	println!("\x1b[38;2;0;255;0mlisting program ids\x1b[39m");
@@ -287,6 +271,7 @@ fn main() {
 			"0" => guess_num(),
 			"1" => guess_word(),
 			"2" => num_gen(),
+			"3" => neural_net(),
 			_ => println!("unrecognized id"),
 		}
 	}
