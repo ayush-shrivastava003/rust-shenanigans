@@ -97,7 +97,7 @@ impl Net {
 			}
 			let mut i3 = 0usize;
 			loop {
-				if i3 >= self.layer_width*5-1 {
+				if i3 >= self.layer_width*5 {
 					break;
 				}
 				print!("_");
@@ -117,7 +117,7 @@ impl Net {
 		}
 		let mut i3 = 0usize;
 		loop {
-			if i3 >= self.layer_width*5-1 {
+			if i3 >= self.layer_width*5 {
 				break;
 			}
 			print!("_");
