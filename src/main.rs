@@ -279,6 +279,11 @@ fn neural_net() {
 			for watch in &watched {
 				println!("Node: ({}, {}), value: {}", watch.0, watch.1, net.layers[watch.0][watch.1].value);
 			}
+		// displays help on the network builder
+		} else if com == "help" {
+			let nbh = ["help about help:\n\nhelp gives help with using the neural network builder\n\nsee help (1) for a list of help pages", "help pages:\n\n\u{2022} run - 2\n\u{2022} nodes - 3\n\u{2022} connections 4\n\u{2022} watch - 5", "help about run:\n\nrun will run the network doing the following:\n\n\u{2022} assemble the network using given nodes and the connections between them\n\u{2022} calls print on the network, printing the layers\n\u{2022} prints the values of all watched nodes (see help 5)", "help about nodes:\n\nopens the dialog to edit network nodes\n\n\u{2022} clear - clears all nodes\n\u{2022} list - lists the nodes\n\u{2022} new - creates a new node\n\u{2022} edit - edits the node type of a node\n\u{2022} remove - removes a node", "help about connections:\n\nopens the dialog to edit network connections\n\n\u{2022} clear - clears all connections\n\u{2022} list - lists the connections\n\u{2022} new - creates a new connection\n\u{2022} edit - edits the weight of a connection\n\u{2022} remove - removes a connection", "help about watch:\n\nopens the dialog to edit watched network nodes\n\n\u{2022} clear - clears the list of all watched nodes\n\u{2022} list - lists the watched nodes\n\u{2022} new - watches a node\n\u{2022} remove - stops watching a node"];
+			let n = read_net_num(String::from("enter number from 0 to 5:"));
+			println!("\x1b[38;2;255;255;0mNeural Network Builder Help\x1b[39m\n\n{}", nbh[n as usize]);
 		// edits the networks nodes
 		} else if com == "nodes" {
 			loop {
@@ -683,7 +688,7 @@ fn neural_net() {
 						if i >= nodes.len() {
 							break;
 						}
-						println!(i);
+						println!("{}", i);
 						i += 1;
 					}
 					let mut y : usize = 0;
